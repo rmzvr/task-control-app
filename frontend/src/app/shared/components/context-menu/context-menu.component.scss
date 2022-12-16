@@ -1,0 +1,46 @@
+.context-menu {
+  position: absolute;
+  top: 40px;
+  right: 8px;
+
+  width: 13rem;
+
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+
+  z-index: 10;
+}
+
+.context-menu__header {
+  display: flex;
+  color: black;
+  font-size: 0.8rem;
+  justify-content: center;
+  align-items: center;
+
+  margin-inline: 0.6rem;
+
+  border-bottom: 1px solid lightgray;
+  padding-block: 0.5rem;
+}
+
+.context-menu__title {
+  font-weight: normal;
+}
+
+.context-menu__button-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  font-size: 1.3rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-content: center;
+}
+
+.context-menu__body {
+  margin: 0.6rem;
+}

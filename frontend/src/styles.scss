@@ -1,0 +1,65 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: bold;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: "Noto Sans", sans-serif;
+
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.draggable-helper-overlay {
+  pointer-events: none !important;
+}
+
+.draggable {
+  cursor: move;
+  user-select: none;
+}
+
+.draggable.dragging {
+  display: none;
+}
+
+.container {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+.dropzone-entered {
+  .entered {
+    pointer-events: none;
+  }
+}

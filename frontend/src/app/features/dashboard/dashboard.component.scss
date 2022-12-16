@@ -1,0 +1,36 @@
+.container {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+.dashboard {
+  padding: 2rem;
+}
+
+.dashboard__content {
+  padding-inline: 10rem;
+}
+
+.boards-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.add-board-tile {
+  background-color: #f5f6f8;
+  min-height: 6.6rem;
+  display: grid;
+  place-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #091e4214;
+  }
+}
+
+.add-board-tile__title {
+  font-weight: normal;
+  font-size: 1rem;
+}

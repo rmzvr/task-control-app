@@ -1,0 +1,17 @@
+<ul [class]="getClass()">
+  <li class="color" *ngFor="let color of colors">
+    <input
+      class="color__input"
+      [id]="color.name"
+      name="color"
+      type="radio"
+      (change)="setColor(color.code)"
+      [checked]="currentColor === color.code"
+    />
+    <label
+      class="color__label"
+      [for]="color.name"
+      [ngStyle]="{ 'background-color': color.code }"
+    ></label>
+  </li>
+</ul>

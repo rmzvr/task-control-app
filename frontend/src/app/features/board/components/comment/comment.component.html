@@ -1,0 +1,57 @@
+<div class="comment">
+  <div class="comment__header">
+    <div class="comment__user">{{ user.username }}</div>
+    <div class="comment__time">
+      {{ comment.created_date | date: "dd.MM.YYYY" }}
+    </div>
+  </div>
+  <ng-container *ngIf="!isEditCommentFormOpen">
+    <div class="task__comment-input-wrapper">
+      <div class="task__comment-input">{{ comment.name }}</div>
+    </div>
+    <div class="comment__footer">
+      <a
+        href="#"
+        class="comment__link"
+        (click)="toggleEditCommentForm(); $event.preventDefault()"
+        >Edit</a
+      >
+      <span> - </span>
+      <a href="#" class="comment__link" (click)="deleteComment($event, comment)"
+        >Delete</a
+      >
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isEditCommentFormOpen">
+    <div class="comment__body">
+      <div class="task__comment-input-wrapper">
+        <textarea
+          class="task__comment-input"
+          resize
+          autofocus
+          #commentTextarea
+          >{{ comment.name }}</textarea
+        >
+      </div>
+      <div class="comment__footer">
+        <div class="form__buttons">
+          <button
+            class="form__button-submit"
+            type="submit"
+            (click)="updateComment($event, comment, commentTextarea.value)"
+          >
+            Save
+          </button>
+          <button
+            class="form__button-close"
+            type="button"
+            (click)="toggleEditCommentForm(); $event.preventDefault()"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

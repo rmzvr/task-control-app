@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="container">
+  <section class="dashboard">
+    <toolbar heading="Dashboard" [isDashboardPage]="true"></toolbar>
+
+    <ul class="boards-container">
+      <div class="add-board-tile" (click)="toggleAddBoardModal()">
+        <span class="add-board-tile__title">Create new board</span>
+      </div>
+      <ng-container *ngIf="(status$ | async) === 'loading'">
+        <skeleton-rect></skeleton-rect>
+        <skeleton-rect></skeleton-rect>
+        <skeleton-rect></skeleton-rect>
+        <skeleton-rect></skeleton-rect>
+        <skeleton-rect></skeleton-rect>
+        <skeleton-rect></skeleton-rect>
+      </ng-container>
+
+      <ng-container *ngIf="(status$ | async) === 'success'">
+        <app-board-tile
+          *ngFor="
+            let board of boards$
+              | async
+              | sort
+                : (toolbarValues$ | async)?.sort
+                : (toolbarValues$ | async)?.order
+              | search: (toolbarValues$ | async)?.search:searchType
+          "
+          [board]="board"
+        >
+        </app-board-tile>
+      </ng-container>
+    </ul>
+  </section>
+</div>
+
+<app-add-board-modal *ngIf="isAddBoardModalOpen$ | async"></app-add-board-modal>
+
+<app-edit-board-modal
+  *ngIf="isEditBoardModalOpen$ | async"
+></app-edit-board-modal>

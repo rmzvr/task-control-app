@@ -1,0 +1,42 @@
+<ng-container *ngIf="!isDescriptionFormOpen">
+  <ng-container *ngIf="task.description">
+    <p class="task__description-content" (click)="toggleDescriptionForm()">
+      {{ task.description }}
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="!task.description">
+    <div class="description-fake-text-area" (click)="toggleDescriptionForm()">
+      <span>Add a more detailed description...</span>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="isDescriptionFormOpen">
+  <form class="form">
+    <textarea
+      class="form__textarea"
+      placeholder="Add a more detailed description..."
+      #textarea
+      resize
+      autofocus
+      >{{ task.description }}</textarea
+    >
+    <div class="form__buttons">
+      <button
+        class="form__button-submit"
+        type="submit"
+        (click)="updateDescription($event, textarea.value)"
+      >
+        Save
+      </button>
+      <button
+        class="form__button-close"
+        type="button"
+        (click)="toggleDescriptionForm()"
+      >
+        ×
+      </button>
+    </div>
+  </form>
+</ng-container>

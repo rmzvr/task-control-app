@@ -1,0 +1,99 @@
+.task {
+  width: 768px;
+  height: 943px;
+  background-color: white;
+  border-radius: 3px;
+
+  padding-block: 12px;
+  padding-inline: 24px 12px;
+
+  background-color: #f4f5f7;
+
+  overflow-y: auto;
+}
+
+.task__header {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 0.6rem;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas:
+    "icon title button"
+    "icon detail button";
+
+  margin-bottom: 24px;
+
+  &-icon {
+    grid-area: icon;
+
+    margin-top: 10px;
+  }
+}
+
+.task__title {
+  grid-area: title;
+  line-height: 1;
+
+  margin-top: 8px;
+}
+
+.task__detail {
+  grid-area: detail;
+
+  font-weight: normal;
+
+  margin-left: 2px;
+
+  > * {
+    color: #5e6c84;
+  }
+}
+
+.task__button-close {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-content: center;
+  grid-area: button;
+
+  font-size: 2rem;
+
+  color: #42526e;
+}
+
+.task__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.task__body {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 100%;
+}
+
+.task__description,
+.task__activity {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 100%;
+}
+
+.task__description-header,
+.task__activity-header {
+  display: flex;
+  gap: 1rem;
+}
+
+.task__description-body,
+.task__activity-body {
+  margin-left: 2.6rem;
+}
+
+.task__activity-comments {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 100%;
+}

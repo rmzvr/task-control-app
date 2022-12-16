@@ -1,0 +1,93 @@
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+
+  display: grid;
+  place-content: center;
+}
+
+.modal {
+  width: 30rem;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  padding: 1rem;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 1rem;
+  min-height: 45px;
+}
+
+.modal__title {
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-weight: normal;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.form__items {
+  display: grid;
+  gap: 1rem;
+}
+
+.form__input {
+  width: 100%;
+
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  padding-inline: 0.5rem;
+  min-height: 2.6rem;
+
+  &:focus {
+    border: 2px solid lightgrey;
+  }
+
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+}
+
+.form__button-submit {
+  background-color: #0079bf;
+  color: white;
+
+  border: none;
+
+  min-height: 2.6rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  width: 100%;
+
+  &:disabled {
+    background-color: #0069d9c0;
+    cursor: not-allowed;
+  }
+}
+
+.form__input-label {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+.form__error-label {
+  color: red;
+  font-size: 14px;
+  font-weight: 400;
+}

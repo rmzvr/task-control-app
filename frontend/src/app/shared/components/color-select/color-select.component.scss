@@ -1,0 +1,64 @@
+.colors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.colors.large {
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 5rem;
+}
+
+.colors.small {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 3rem;
+}
+
+.color {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+}
+
+.color__input {
+  position: absolute;
+
+  visibility: hidden;
+
+  &:checked + .color__label {
+    position: relative;
+
+    &::before {
+      content: url("../../../../assets/check-mark.png");
+
+      width: 100%;
+      height: 100%;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      display: grid;
+      place-content: center;
+
+      border-radius: 5px;
+
+      font-size: 2rem;
+
+      color: white;
+      background-color: rgba($color: #000000, $alpha: 0.2);
+    }
+  }
+}
+
+.color__label {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}

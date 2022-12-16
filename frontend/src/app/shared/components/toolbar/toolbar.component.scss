@@ -1,0 +1,41 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 2rem;
+
+  .toolbar__items {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .toolbar__item-label {
+    font-size: 0.75rem;
+
+    color: #5e6c84;
+  }
+
+  .toolbar__item-title {
+    margin-bottom: 0.3rem;
+    margin-left: 5px;
+  }
+}
+
+.toolbar__item-field {
+  width: 13rem;
+  height: 2.5rem;
+
+  padding-inline: 0.2rem;
+
+  border: 2px solid lightgray;
+  border-radius: 5px;
+
+  &:focus {
+    border-color: lightskyblue;
+  }
+}
+
+input.toolbar__item-field {
+  padding-left: 0.37rem;
+}

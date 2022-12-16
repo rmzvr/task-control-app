@@ -1,0 +1,45 @@
+<form class="form-input-wrapper">
+  <textarea
+    class="form-input"
+    type="text"
+    placeholder="Write a comment..."
+    (click)="toggleAddCommentForm()"
+    *ngIf="!isAddCommentFormOpen"
+  ></textarea>
+
+  <ng-container *ngIf="isAddCommentFormOpen">
+    <div class="form-comment-body">
+      <div class="form-input-wrapper">
+        <textarea
+          class="form-input"
+          resize
+          autofocus
+          #commentTextarea
+          placeholder="Write a comment..."
+        ></textarea>
+      </div>
+      <div class="form-comment-footer">
+        <div class="form__buttons">
+          <button
+            class="form__button-submit"
+            type="submit"
+            (click)="
+              addComment($event, commentTextarea.value);
+              commentTextarea.value = '';
+              toggleAddCommentForm()
+            "
+          >
+            Save
+          </button>
+          <button
+            class="form__button-close"
+            type="button"
+            (click)="toggleAddCommentForm(); $event.preventDefault()"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</form>

@@ -1,0 +1,108 @@
+// TASK MENU ==========================>
+// .task-modal {
+// position: absolute;
+// top: 0;
+// left: 0;
+// bottom: 0;
+// right: 0;
+// background-color: rgba($color: #000000, $alpha: 0.6);
+// display: grid;
+// place-content: center;
+// }
+
+.task-menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  background-color: rgba($color: #000000, $alpha: 0.3);
+
+  .task-menu {
+    position: relative;
+    max-width: fit-content;
+    min-height: min-content;
+    display: flex;
+    gap: 0.5rem;
+
+    textarea {
+      width: 276px;
+      background-color: white;
+      border-radius: 3px;
+      resize: none;
+      min-height: 90px;
+
+      overflow-wrap: break-word;
+      resize: none;
+      color: #172b4d;
+      font-size: 14px;
+      font-weight: 400;
+
+      padding-block: 3px;
+      padding-inline: 5px 3px;
+
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 20px;
+      overflow-wrap: break-word;
+    }
+
+    button {
+      width: 80px;
+      height: 32px;
+      padding: 6px 24px;
+      border-radius: 3px;
+      color: white;
+      background-color: #0079bf;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+
+      &:hover {
+        background-color: #026aa7;
+      }
+    }
+  }
+
+  .task-menu__items {
+    display: grid;
+    gap: 0.4rem;
+    height: max-content;
+  }
+
+  .task-menu__item {
+    background: #0009;
+    color: #fff;
+    border-radius: 3px;
+    padding-inline: 10px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    max-width: max-content;
+    height: 40px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      transform: translateX(5px);
+      transition: 0.1s;
+      background-color: #000c;
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  .task-menu__form {
+    display: grid;
+    gap: 0.5rem;
+  }
+}

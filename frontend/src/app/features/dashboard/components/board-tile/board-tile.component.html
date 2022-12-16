@@ -1,0 +1,112 @@
+<div
+  class="board-tile"
+  [routerLink]="['/board', board._id]"
+  [ngStyle]="{ backgroundColor: board.background }"
+  [attr.data-id]="board._id"
+>
+  <h2 class="board-tile__title">{{ board.name }}</h2>
+
+  <div class="board-tile__menu-button">
+    <app-button-more (clickEmitter)="toggleMenu($event)"></app-button-more>
+  </div>
+
+  <p class="board-tile__description">{{ board.description }}</p>
+  <div class="board-tile__tasks">
+    <div class="board-tile__tasks-item" *ngFor="let list of board.lists">
+      <svg
+        *ngIf="list.name === 'Todo'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+        class="board-tile__tasks-icon"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"
+        />
+        <path
+          d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
+        />
+      </svg>
+
+      <svg
+        *ngIf="list.name === 'In progress'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+        class="board-tile__tasks-icon"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+        />
+      </svg>
+
+      <svg
+        *ngIf="list.name === 'Done'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+        class="board-tile__tasks-icon"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"
+        />
+      </svg>
+
+      <span class="board-tile__tasks-count" *ngIf="list.name !== 'Archive'">
+        {{ list.tasks.length }}</span
+      >
+    </div>
+  </div>
+
+  <span class="board-tile__date">
+    {{ board.created_date | date: "dd.MM.YYYY" }}
+  </span>
+
+  <div class="board-tile__menu" *ngIf="isMenuOpen">
+    <div class="board-tile__menu-header">
+      <h3 class="board-tile__menu-title">Options</h3>
+
+      <button
+        class="board-tile__menu-close-button"
+        (click)="toggleMenu($event)"
+      >
+        ×
+      </button>
+    </div>
+
+    <ul class="board-tile__menu-items">
+      <li class="board-tile__menu-item">
+        <button
+          class="board-tile__menu-item-button"
+          type="button"
+          (click)="toggleUpdateBoardModal(board); toggleMenu($event)"
+        >
+          Edit
+        </button>
+      </li>
+
+      <li class="board-tile__menu-item">
+        <button
+          class="board-tile__menu-item-button"
+          type="button"
+          (click)="deleteBoard()"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

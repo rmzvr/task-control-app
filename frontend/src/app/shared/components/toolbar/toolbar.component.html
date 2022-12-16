@@ -1,0 +1,69 @@
+<div class="toolbar">
+  <h2 class="toolbar__title">{{ title }}</h2>
+  <ul class="toolbar__items">
+    <li class="toolbar__item">
+      <label class="toolbar__item-label">
+        <h3 class="toolbar__item-title">Search</h3>
+
+        <input
+          class="toolbar__item-field"
+          type="text"
+          placeholder="Search..."
+          (keyup)="updateSearchValue(input.value)"
+          #input
+        />
+      </label>
+    </li>
+    <li class="toolbar__item">
+      <label class="toolbar__item-label">
+        <h3 class="toolbar__item-title">Sort by</h3>
+
+        <select
+          class="toolbar__item-field"
+          name="select"
+          (change)="updateSortValue(sortSelect.value)"
+          #sortSelect
+        >
+          <ng-container
+            *ngIf="isDashboardPage; then dashboardTemplate; else boardTemplate"
+          ></ng-container>
+        </select>
+      </label>
+    </li>
+
+    <li class="toolbar__item">
+      <label class="toolbar__item-label">
+        <h3 class="toolbar__item-title">Order by</h3>
+
+        <select
+          class="toolbar__item-field"
+          name="select"
+          (change)="updateOrderValue(orderSelect.value)"
+          #orderSelect
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </label>
+    </li>
+  </ul>
+</div>
+
+<ng-template #dashboardTemplate>
+  <optgroup label="Board">
+    <option value="name" selected>Name</option>
+    <option value="created_date">Date</option>
+  </optgroup>
+  <optgroup label="Task">
+    <option value="new">New</option>
+    <option value="progress">In progress</option>
+    <option value="done">Done</option>
+  </optgroup>
+</ng-template>
+
+<ng-template #boardTemplate>
+  <optgroup label="Task">
+    <option value="name" selected>Name</option>
+    <option value="created_date">Date</option>
+  </optgroup>
+</ng-template>

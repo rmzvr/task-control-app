@@ -1,0 +1,146 @@
+<li
+  class="list"
+  [style]="{ 'border-bottom-color': list.background }"
+  dropzone
+  (drop)="moveTask()"
+  [attr.data-archive]="list.isArchive"
+  *ngIf="list.boardID === boardID"
+>
+  <div class="list__header">
+    <h2 class="list__title">{{ list.name }}</h2>
+
+    <ng-container *ngIf="!list.isArchive">
+      <app-button-more
+        [isButtonLight]="false"
+        (clickEmitter)="toggleContextMenu()"
+      ></app-button-more>
+    </ng-container>
+
+    <ng-container *ngIf="list.isArchive">
+      <button
+        type="button"
+        class="list__header-archive-button"
+        (click)="toggleArchivedTasksVisibility(); rotate()"
+        [@rotatedState]="state"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+          />
+        </svg>
+      </button>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="!isArchivedTaskVisible && list.isArchive">
+    <div
+      class="task-item-pseudo"
+      *ngIf="editTaskMenuPosition$ | async as editTaskMenuPosition"
+      [style]="{
+        width: editTaskMenuPosition.width + 'px',
+        height: editTaskMenuPosition.height + 'px'
+      }"
+    ></div>
+  </ng-container>
+
+  <ng-container *ngIf="tasks$ | async | sortTasks: list._id as tasks">
+    <ul
+      class="list__tasks"
+      [attr.data-archiv]="list.isArchive"
+      [attr.data-visible]="isArchivedTaskVisible"
+    >
+      <div
+        class="archiv"
+        *ngIf="list.isArchive && isArchivedTaskVisible && !tasks.length"
+      >
+        <span>No archived tasks</span>
+      </div>
+      <app-task-item
+        *ngFor="
+          let task of tasks
+            | sort
+              : (toolbarValues$ | async)?.sort
+              : (toolbarValues$ | async)?.order
+            | search: (toolbarValues$ | async)?.search:searchType
+        "
+        [task]="task"
+      ></app-task-item>
+
+      <div
+        class="task-item-pseudo"
+        *ngIf="editTaskMenuPosition$ | async as editTaskMenuPosition"
+        [style]="{
+          width: editTaskMenuPosition.width + 'px',
+          height: editTaskMenuPosition.height + 'px'
+        }"
+      ></div>
+    </ul>
+  </ng-container>
+
+  <div class="list__footer" *ngIf="!list.isArchive">
+    <ng-container *ngIf="!isNewTaskFormOpen; else newTaskForm">
+      <button class="list__button-add-task" (click)="toggleNewTaskForm()">
+        <span class="list__button-content-plus">+</span>
+        <span class="list__button-content-text">Add a task</span>
+      </button>
+    </ng-container>
+  </div>
+
+  <div class="context-menu" *ngIf="isContextMenuOpen">
+    <div class="context-menu__header">
+      <h3 class="context-menu__title">Options</h3>
+      <button class="context-menu__button-close" (click)="toggleContextMenu()">
+        ×
+      </button>
+    </div>
+
+    <div class="context-menu__body">
+      <form class="modal__form">
+        <label class="menu__label" for="colors">Background</label>
+
+        <app-color-select
+          [currentColor]="list.background"
+          size="small"
+          (clickEmitter)="updateList(list, $event)"
+        ></app-color-select>
+      </form>
+    </div>
+  </div>
+</li>
+
+<ng-template #newTaskForm>
+  <form class="form">
+    <div class="form__textarea-wrapper">
+      <textarea
+        class="form__textarea"
+        placeholder="Enter title for this task..."
+        #textarea
+      ></textarea>
+    </div>
+    <div class="form__buttons">
+      <button
+        class="form__button-submit"
+        type="submit"
+        (click)="addTask($event, textarea.value); textarea.value = ''"
+      >
+        Add task
+      </button>
+      <button
+        class="form__button-close"
+        type="button"
+        (click)="toggleNewTaskForm()"
+      >
+        ×
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<app-task-menu></app-task-menu>
