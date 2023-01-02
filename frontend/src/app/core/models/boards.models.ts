@@ -1,4 +1,4 @@
-import { List } from '../lists';
+import { List } from '../states/lists';
 
 export interface Board {
   _id: string;

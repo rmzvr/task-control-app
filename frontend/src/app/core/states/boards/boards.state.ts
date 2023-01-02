@@ -1,4 +1,4 @@
-import { BoardsState } from './boards.models';
+import { BoardsState } from '../../models/boards.models';
 
 export const initialState: BoardsState = {
   boards: [],

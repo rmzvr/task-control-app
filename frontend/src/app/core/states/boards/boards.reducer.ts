@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { BoardsState } from './boards.models';
+import { BoardsState } from '../../models/boards.models';
 import {
   addBoard,
   updateBoard,
@@ -19,7 +19,7 @@ import { initialState } from './boards.state';
 
 export const boardsReducer = createReducer(
   initialState,
-  
+
   on(addBoard, (state, { board }) => ({
     ...state,
     boards: [...state.boards, board],

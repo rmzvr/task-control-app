@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { List } from './lists.models';
+import { List } from '../../models/lists.models';
 
 export const addList = createAction(
   '[Board Page] Add List',

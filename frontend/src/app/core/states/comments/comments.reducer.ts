@@ -7,7 +7,7 @@ import {
   setCurrentComment,
   updateComment,
 } from './comments.actions';
-import { CommentsState } from './comments.models';
+import { CommentsState } from '../../models/comments.models';
 import { initialState } from './comments.state';
 
 export const commentsReducer = createReducer(

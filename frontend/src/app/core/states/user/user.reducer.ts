@@ -7,7 +7,7 @@ import {
   loadUserFailed,
   loadUserSuccess,
 } from './user.actions';
-import { UserState } from './user.models';
+import { UserState } from '../../models/user.models';
 import { initialState } from './user.state';
 
 export const userReducer = createReducer(

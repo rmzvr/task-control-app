@@ -1,12 +1,12 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { boardsReducer } from './boards';
+import { commentsReducer } from './comments';
 import { State } from './core.state';
-import { boardsReducer } from './states/boards';
-import { commentsReducer } from './states/comments';
-import { listsReducer } from './states/lists';
-import { modalsReducer } from './states/modals';
-import { tasksReducer } from './states/tasks';
-import { toolbarReducer } from './states/toolbar';
-import { userReducer } from './states/user';
+import { listsReducer } from './lists';
+import { modalsReducer } from './modals';
+import { tasksReducer } from './tasks';
+import { toolbarReducer } from './toolbar';
+import { userReducer } from './user';
 
 export const reducers: ActionReducerMap<State> = {
   boards: boardsReducer,

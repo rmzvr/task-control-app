@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ModalsState } from './modals.models';
+import { ModalsState } from '../../models/modals.models';
 
 export const selectModals = createFeatureSelector<ModalsState>('modals');
 

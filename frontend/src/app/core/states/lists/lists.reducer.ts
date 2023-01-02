@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { ListsState } from './lists.models';
+import { ListsState } from '../../models/lists.models';
 import {
   addList,
   updateList,

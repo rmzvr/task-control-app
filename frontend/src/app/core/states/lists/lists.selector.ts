@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, props } from '@ngrx/store';
-import { List, ListsState } from './lists.models';
+import { List, ListsState } from '../../models/lists.models';
 
 export const selectLists = createFeatureSelector<ListsState>('lists');
 

@@ -7,7 +7,7 @@ import {
   loadTasks,
   loadTasksSuccess,
 } from './tasks.actions';
-import { TasksState } from './tasks.models';
+import { TasksState } from '../../models/tasks.models';
 import { initialState } from './tasks.state';
 
 export const tasksReducer = createReducer(

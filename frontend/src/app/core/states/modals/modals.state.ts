@@ -1,4 +1,4 @@
-import { ModalsState } from './modals.models';
+import { ModalsState } from '../../models/modals.models';
 
 export const initialState: ModalsState = {
   title: '',

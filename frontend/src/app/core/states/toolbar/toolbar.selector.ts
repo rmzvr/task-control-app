@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ToolbarState } from './toolbar.models';
+import { ToolbarState } from '../../models/toolbar.models';
 
 export const selectToolbar = createFeatureSelector<ToolbarState>('toolbar');
 

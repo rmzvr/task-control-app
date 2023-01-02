@@ -18,12 +18,12 @@ import {
   addTask,
   updateTask,
   setCurrentTask,
+  Task,
 } from '@core/states/tasks';
 
-import { Task } from '@core/states/tasks/tasks.models';
 import { selectToolbarValues, ToolbarState } from '@core/states/toolbar';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'list',
@@ -39,8 +39,6 @@ import { Observable } from 'rxjs';
   ],
 })
 export class ListComponent implements OnInit {
-  public searchType: string = 'task';
-
   @Input() list!: List;
   @Input() boardID!: string;
 
@@ -73,6 +71,29 @@ export class ListComponent implements OnInit {
     this.currentTask$.subscribe((task) => {
       this.currentTask = task;
     });
+
+    this.tasks$ = combineLatest([
+      this.tasks$,
+      this.toolbarValues$.pipe(map((v) => v.search)),
+      this.toolbarValues$.pipe(map((v) => v.sort)),
+      this.toolbarValues$.pipe(map((v) => v.order)),
+    ]).pipe(
+      map(([tasks, search, sort, order]) => {
+        const el = ['new', 'progress', 'done'];
+
+        const filteredTasks = [...tasks].filter((task: any) =>
+          task.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        );
+
+        const sortedTasks = filteredTasks.sort((a: any, b: any) => {
+          return a[sort]
+            .toLocaleLowerCase()
+            .localeCompare(b[sort].toLocaleLowerCase());
+        });
+
+        return order === 'asc' ? sortedTasks : sortedTasks.reverse();
+      })
+    );
   }
 
   public rotate() {

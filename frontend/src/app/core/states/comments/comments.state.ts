@@ -1,4 +1,4 @@
-import { CommentsState } from './comments.models';
+import { CommentsState } from '../../models/comments.models';
 
 export const initialState: CommentsState = {
   comments: [],

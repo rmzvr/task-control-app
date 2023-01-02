@@ -17,17 +17,10 @@
       </ng-container>
 
       <ng-container *ngIf="(status$ | async) === 'success'">
-        <app-board-tile
-          *ngFor="
+        <app-board-tile *ngFor="
             let board of boards$
               | async
-              | sort
-                : (toolbarValues$ | async)?.sort
-                : (toolbarValues$ | async)?.order
-              | search: (toolbarValues$ | async)?.search:searchType
-          "
-          [board]="board"
-        >
+          " [board]="board">
         </app-board-tile>
       </ng-container>
     </ul>
@@ -36,6 +29,4 @@
 
 <app-add-board-modal *ngIf="isAddBoardModalOpen$ | async"></app-add-board-modal>
 
-<app-edit-board-modal
-  *ngIf="isEditBoardModalOpen$ | async"
-></app-edit-board-modal>
+<app-edit-board-modal *ngIf="isEditBoardModalOpen$ | async"></app-edit-board-modal>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  combineLatest,
+  map,
+  Observable,
+} from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   Board,
@@ -21,8 +25,6 @@ import { loadUser, selectUser, User } from '@core/states/user';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  public searchType: string = 'board';
-
   public isAddBoardModalOpen$: Observable<boolean>;
   public isEditBoardModalOpen$: Observable<boolean>;
 
@@ -51,6 +53,40 @@ export class DashboardComponent implements OnInit {
       if (!user) return;
       this.store.dispatch(loadBoards({ id: user?._id }));
     });
+
+    this.boards$ = combineLatest([
+      this.boards$,
+      this.toolbarValues$.pipe(map((v) => v.search)),
+      this.toolbarValues$.pipe(map((v) => v.sort)),
+      this.toolbarValues$.pipe(map((v) => v.order)),
+    ]).pipe(
+      map(([boards, search, sort, order]) => {
+        const el = ['new', 'progress', 'done'];
+
+        let sortedBoards;
+
+        const filteredBoards = [...boards].filter((board: any) =>
+          board.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        );
+
+        if (sort === 'name' || sort === 'created_date') {
+          sortedBoards = [...filteredBoards].sort((a: any, b: any) => {
+            return a[sort]
+              .toLocaleLowerCase()
+              .localeCompare(b[sort].toLocaleLowerCase());
+          });
+        } else {
+          sortedBoards = [...filteredBoards].sort((a: any, b: any) => {
+            let aLength = a.lists[el.indexOf(sort)].tasks.length;
+            let bLength = b.lists[el.indexOf(sort)].tasks.length;
+
+            return bLength - aLength;
+          });
+        }
+
+        return order === 'asc' ? sortedBoards : sortedBoards.reverse();
+      })
+    );
   }
 
   public toggleAddBoardModal(): void {

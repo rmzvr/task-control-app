@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BoardsState } from './boards.models';
+import { BoardsState } from '../../models/boards.models';
 
 export const selectBoards = createFeatureSelector<BoardsState>('boards');
 

@@ -5,7 +5,7 @@ import { toggleTaskModal } from '@core/states/modals';
 import { selectCurrentTask } from '@core/states/tasks';
 import { selectUser } from '@core/states/user';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { concatMap, filter, from, Observable, toArray } from 'rxjs';
 
 @Component({
   selector: 'task-modal',
@@ -28,6 +28,15 @@ export class TaskModalComponent implements OnInit {
     this.task$.subscribe((task) => {
       this.store.dispatch(loadComments({ boardID: task.boardID }));
       this.list$ = this.store.select(selectList({ id: task.listID }));
+
+      this.comments$ = this.store.select(selectTaskComments).pipe(
+        concatMap((e) =>
+          from(e).pipe(
+            filter((b) => b.taskID === task._id),
+            toArray()
+          )
+        )
+      );
     });
   }
 
