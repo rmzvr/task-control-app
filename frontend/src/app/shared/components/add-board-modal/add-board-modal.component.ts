@@ -22,20 +22,24 @@ export class AddBoardModalComponent implements OnInit {
   public user$: Observable<User | null>;
 
   public boardForm: FormGroup;
+  public userID!: string;
 
   constructor(private store: Store) {
-    this.title$ = this.store.select(selectModalTitle);
-
     this.boardForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
     });
 
+    this.title$ = this.store.select(selectModalTitle);
     this.user$ = this.store.select(selectUser);
+
+    this.user$.subscribe((user) => {
+      this.userID = user?._id as string;
+    });
   }
 
   ngOnInit(): void {
-    this.store.dispatch(updateModalTitle({ title: 'Create board' }));
+    this.updateModalTitle();
   }
 
   public setColor(color: string): void {
@@ -60,23 +64,19 @@ export class AddBoardModalComponent implements OnInit {
       return;
     }
 
-    let userID: string = '';
-
-    this.user$.subscribe((user) => {
-      userID = user?._id as string;
-    });
-
     this.store.dispatch(
       addBoard({
         board: {
           ...this.boardForm.value,
           background: this.color,
-          userID,
+          userID: this.userID,
         },
       })
     );
+  }
 
-    this.closeModal();
+  public updateModalTitle(): void {
+    this.store.dispatch(updateModalTitle({ title: 'Create board' }));
   }
 
   get name() {

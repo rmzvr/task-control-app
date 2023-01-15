@@ -14,27 +14,14 @@
 
 <ng-container *ngIf="isDescriptionFormOpen">
   <form class="form">
-    <textarea
-      class="form__textarea"
-      placeholder="Add a more detailed description..."
-      #textarea
-      resize
-      autofocus
-      >{{ task.description }}</textarea
-    >
+    <textarea class="form__textarea" placeholder="Add a more detailed description..." #textarea resize
+      autofocus>{{ task.description }}</textarea>
     <div class="form__buttons">
-      <button
-        class="form__button-submit"
-        type="submit"
-        (click)="updateDescription($event, textarea.value)"
-      >
+      <button class="form__button-submit" type="button"
+        (click)="updateDescription(textarea.value); setCurrentTask(textarea.value); toggleDescriptionForm()">
         Save
       </button>
-      <button
-        class="form__button-close"
-        type="button"
-        (click)="toggleDescriptionForm()"
-      >
+      <button class="form__button-close" type="button" (click)="toggleDescriptionForm()">
         ×
       </button>
     </div>

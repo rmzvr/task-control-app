@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BoardService } from '@features/dashboard/services/board.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import {
   addBoard,
   addBoardSuccess,
@@ -15,6 +15,7 @@ import {
   loadBoards,
   loadBoardsFailed,
   loadBoardsSuccess,
+  Board,
 } from '../boards';
 
 @Injectable()
@@ -30,11 +31,9 @@ export class BoardsEffects {
         deleteBoardSuccess
       ),
       switchMap((action) =>
-        from(
-          this.boardsService.getBoards(action.id).pipe(
-            map((boards: any) => loadBoardsSuccess({ boards: boards })),
-            catchError((error) => of(loadBoardsFailed({ error })))
-          )
+        this.boardsService.getBoards(action.id).pipe(
+          map((boards: Board[]) => loadBoardsSuccess({ boards: boards })),
+          catchError((error) => of(loadBoardsFailed({ error })))
         )
       )
     )

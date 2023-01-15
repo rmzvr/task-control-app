@@ -8,7 +8,7 @@ import { LoginService } from '@features/login/services/login.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   public logout(): void {
     this.loginService.logout();

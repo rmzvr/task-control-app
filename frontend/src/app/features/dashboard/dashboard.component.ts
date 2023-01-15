@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  combineLatest,
-  map,
-  Observable,
-} from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   Board,
@@ -47,11 +43,11 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUser());
+    this.loadUser();
 
     this.user$.subscribe((user) => {
       if (!user) return;
-      this.store.dispatch(loadBoards({ id: user?._id }));
+      this.loadBoards(user._id);
     });
 
     this.boards$ = combineLatest([
@@ -87,6 +83,14 @@ export class DashboardComponent implements OnInit {
         return order === 'asc' ? sortedBoards : sortedBoards.reverse();
       })
     );
+  }
+
+  public loadUser(): void {
+    this.store.dispatch(loadUser());
+  }
+
+  public loadBoards(id: string): void {
+    this.store.dispatch(loadBoards({ id }));
   }
 
   public toggleAddBoardModal(): void {

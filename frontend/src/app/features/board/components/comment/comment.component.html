@@ -10,44 +10,24 @@
       <div class="task__comment-input">{{ comment.name }}</div>
     </div>
     <div class="comment__footer">
-      <a
-        href="#"
-        class="comment__link"
-        (click)="toggleEditCommentForm(); $event.preventDefault()"
-        >Edit</a
-      >
+      <button class="comment__link" (click)="toggleEditCommentForm()">Edit</button>
       <span> - </span>
-      <a href="#" class="comment__link" (click)="deleteComment($event, comment)"
-        >Delete</a
-      >
+      <button class="comment__link" (click)="deleteComment()">Delete</button>
     </div>
   </ng-container>
 
   <ng-container *ngIf="isEditCommentFormOpen">
     <div class="comment__body">
       <div class="task__comment-input-wrapper">
-        <textarea
-          class="task__comment-input"
-          resize
-          autofocus
-          #commentTextarea
-          >{{ comment.name }}</textarea
-        >
+        <textarea class="task__comment-input" resize autofocus #commentTextarea>{{ comment.name }}</textarea>
       </div>
       <div class="comment__footer">
         <div class="form__buttons">
-          <button
-            class="form__button-submit"
-            type="submit"
-            (click)="updateComment($event, comment, commentTextarea.value)"
-          >
+          <button class="form__button-submit" type="submit"
+            (click)="updateComment(commentTextarea.value); toggleEditCommentForm();">
             Save
           </button>
-          <button
-            class="form__button-close"
-            type="button"
-            (click)="toggleEditCommentForm(); $event.preventDefault()"
-          >
+          <button class="form__button-close" type="button" (click)="toggleEditCommentForm(); $event.preventDefault()">
             ×
           </button>
         </div>

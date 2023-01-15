@@ -1,23 +1,15 @@
 <app-header></app-header>
+
 <div class="container">
   <div class="board">
-    <toolbar [title]="(board$ | async)?.name"></toolbar>
+    <app-toolbar></app-toolbar>
     <ul class="lists">
-      <list
-        *ngFor="let list of lists$ | async"
-        [list]="list"
-        [boardID]="boardID"
-      >
+      <list *ngFor="let list of lists$ | async" [list]="list">
       </list>
     </ul>
   </div>
 </div>
 
-<div
-  class="task-overlay"
-  data-overlay="true"
-  *ngIf="isTaskModalOpen$ | async"
-  (click)="closeMenuOnOverlay($event)"
->
+<div class="task-overlay" *ngIf="isTaskModalOpen$ | async" (click)="closeMenu($event.target)">
   <task-modal></task-modal>
 </div>

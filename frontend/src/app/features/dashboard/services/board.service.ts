@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Board } from '@core/states/boards';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,16 +9,16 @@ import { Board } from '@core/states/boards';
 export class BoardService {
   constructor(private http: HttpClient) {}
 
-  public getBoards(id: string) {
+  public getBoards(id: string): Observable<Board[]> {
     return this.http.get(
       `https://serene-plains-22341.herokuapp.com/api/boards?userID=${id}`
-    );
+    ) as Observable<Board[]>;
   }
 
-  public getBoard(id: string) {
+  public getBoard(id?: string): Observable<Board> {
     return this.http.get(
       `https://serene-plains-22341.herokuapp.com/api/boards/${id}`
-    );
+    ) as Observable<Board>;
   }
 
   public addBoard(board: Board) {

@@ -13,7 +13,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
   },
   {
-    path: 'board/:id',
+    path: 'board/:name/:id',
     loadChildren: () =>
       import('./features/board/board.module').then(
         (module) => module.BoardModule

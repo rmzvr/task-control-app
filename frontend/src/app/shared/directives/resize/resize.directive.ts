@@ -18,7 +18,6 @@ export class ResizeDirective {
   }
 
   resize() {
-    this.elementRef.nativeElement.style.height = '0';
     this.elementRef.nativeElement.style.height =
       this.elementRef.nativeElement.scrollHeight + 'px';
   }

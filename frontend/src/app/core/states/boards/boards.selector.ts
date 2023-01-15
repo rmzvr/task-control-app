@@ -5,7 +5,7 @@ export const selectBoards = createFeatureSelector<BoardsState>('boards');
 
 export const selectBoardItems = createSelector(
   selectBoards,
-  (state) => state.boards
+  (state: BoardsState) => state.boards
 );
 
 export const selectBoard = (props: { id: string }) =>

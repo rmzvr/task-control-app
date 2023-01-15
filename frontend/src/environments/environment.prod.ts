@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://serene-plains-22341.herokuapp.com/api',
 };

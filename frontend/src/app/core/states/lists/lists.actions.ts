@@ -1,21 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { List } from '../../models/lists.models';
 
-export const addList = createAction(
-  '[Board Page] Add List',
-  props<{ list: List }>()
-);
-
-export const addListSuccess = createAction(
-  '[Board Page] Add List Success',
-  props<{ boardID: string }>()
-);
-
-export const addListFailed = createAction(
-  '[Board Page] Add List Failed',
-  props<{ error: any }>()
-);
-
 export const updateList = createAction(
   '[Board Page] Edit List',
   props<{ list: List }>()
@@ -33,7 +18,7 @@ export const updateListFailed = createAction(
 
 export const loadLists = createAction(
   '[Board Page] Load Lists',
-  props<{ boardID: string | null }>()
+  props<{ boardID: string }>()
 );
 
 export const loadListsSuccess = createAction(

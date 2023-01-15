@@ -18,21 +18,19 @@ export class DescriptionSectionComponent {
     this.isDescriptionFormOpen = !this.isDescriptionFormOpen;
   }
 
-  public updateDescription(event: Event, value: string): void {
-    event.preventDefault();
-
+  public updateDescription(value: string): void {
     this.store.dispatch(
       updateTask({
         task: { ...this.task, description: value },
       })
     );
+  }
 
+  public setCurrentTask(value: string): void {
     this.store.dispatch(
       setCurrentTask({
         task: { ...this.task, description: value },
       })
     );
-
-    this.isDescriptionFormOpen = !this.isDescriptionFormOpen;
   }
 }

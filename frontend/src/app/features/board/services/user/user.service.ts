@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '@core/models/user.models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +9,9 @@ import { Injectable } from '@angular/core';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  public getUser() {
-    return this.http.get(`https://serene-plains-22341.herokuapp.com/api/user`);
+  public getUser(): Observable<User> {
+    return this.http.get(
+      `https://serene-plains-22341.herokuapp.com/api/user`
+    ) as Observable<User>;
   }
 }

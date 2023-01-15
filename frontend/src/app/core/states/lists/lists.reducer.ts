@@ -1,13 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { ListsState } from '../../models/lists.models';
 import {
-  addList,
-  updateList,
   loadLists,
   loadListsSuccess,
   loadListsFailed,
-  addListSuccess,
-  addListFailed,
+  updateList,
   updateListSuccess,
   updateListFailed,
 } from './lists.actions';
@@ -15,22 +12,6 @@ import { initialState } from './lists.state';
 
 export const listsReducer = createReducer(
   initialState,
-  on(addList, (state, { list }) => ({
-    ...state,
-    lists: [...state.lists, list],
-    status: 'loading',
-  })),
-
-  on(addListSuccess, (state) => ({
-    ...state,
-    status: 'success',
-  })),
-
-  on(addListFailed, (state, { error }) => ({
-    ...state,
-    error,
-    status: 'error',
-  })),
 
   on(updateList, (state, { list }) => {
     const listIndex = state.lists.findIndex((l) => l._id === list._id);

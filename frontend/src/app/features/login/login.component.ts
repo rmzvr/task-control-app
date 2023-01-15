@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, of, tap, timeout } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -56,7 +56,7 @@ export class LoginComponent {
         }),
         catchError((err: any) =>
           of(err).pipe(
-            tap(({ error }) => {
+            tap(() => {
               this.message = 'User already exist';
               this.type = 'error';
               this.showSnackbar();
@@ -77,7 +77,10 @@ export class LoginComponent {
     this.loginService
       .loginUser(this.loginForm.value)
       .pipe(
-        tap(() => {
+        tap((res: any) => {
+          localStorage.setItem('token', res.jwt_token);
+          localStorage.setItem('isAuthorized', 'true');
+          
           this.loginForm.reset();
           this.router.navigate(['dashboard']);
         }),

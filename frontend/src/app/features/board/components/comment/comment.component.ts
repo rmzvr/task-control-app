@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { User } from '@core/models/user.models';
 import { deleteComment, updateComment } from '@core/states/comments';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +10,7 @@ import { Store } from '@ngrx/store';
 })
 export class CommentComponent {
   @Input() comment: any;
-  @Input() user: any;
+  @Input() user!: User;
 
   public isEditCommentFormOpen: boolean = false;
 
@@ -19,22 +20,16 @@ export class CommentComponent {
     this.isEditCommentFormOpen = !this.isEditCommentFormOpen;
   }
 
-  public updateComment(event: Event, comment: Comment, value: string): void {
-    event.preventDefault();
-
+  public updateComment(value: string): void {
     this.store.dispatch(
-      updateComment({ comment: { ...comment, name: value } })
+      updateComment({ comment: { ...this.comment, name: value } })
     );
-
-    this.toggleEditCommentForm();
   }
 
-  public deleteComment(event: Event, comment: any): void {
-    event.preventDefault();
-
+  public deleteComment(): void {
     this.store.dispatch(
       deleteComment({
-        comment,
+        comment: this.comment,
       })
     );
   }

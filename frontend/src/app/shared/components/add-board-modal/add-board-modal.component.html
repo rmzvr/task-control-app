@@ -9,7 +9,7 @@
       <span class="modal__close" (click)="closeModal()">&times;</span>
     </div>
     <div class="modal__body">
-      <form class="form" [formGroup]="boardForm" (submit)="addBoard()">
+      <form class="form" [formGroup]="boardForm" (submit)="addBoard(); closeModal()">
         <ul class="form__items">
           <li class="form__item">
             <label class="form__input-label" for="name">Name</label>

@@ -19,6 +19,7 @@ export class EditBoardModalComponent {
 
   public title$: Observable<string>;
   public editableBoard$!: Observable<Board | null>;
+  public editableBoard!: Board | null;
 
   public boardForm!: FormGroup;
 
@@ -26,12 +27,17 @@ export class EditBoardModalComponent {
     this.title$ = this.store.select(selectModalTitle);
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(updateModalTitle({ title: 'Edit board' }));
+  get name() {
+    return this.boardForm.get('name');
+  }
 
+  ngOnInit(): void {
+    this.updateModalTitle();
     this.editableBoard$ = this.store.select(selectEditableBoard);
 
-    this.editableBoard$.subscribe((board) => {
+    this.editableBoard$.subscribe((board: Board | null) => {
+      this.editableBoard = board;
+
       this.boardForm = new FormGroup({
         name: new FormControl(board?.name, [Validators.required]),
       });
@@ -60,24 +66,22 @@ export class EditBoardModalComponent {
       return;
     }
 
-    this.editableBoard$.subscribe((board) => {
-      if (!board) return;
+    if (!this.editableBoard) return;
 
-      this.store.dispatch(
-        updateBoard({
-          board: {
-            ...board,
-            name: this.boardForm.value.name,
-            background: this.color,
-          },
-        })
-      );
-    });
+    this.store.dispatch(
+      updateBoard({
+        board: {
+          ...this.editableBoard,
+          name: this.boardForm.value.name,
+          background: this.color,
+        },
+      })
+    );
 
     this.closeModal();
   }
 
-  get name() {
-    return this.boardForm.get('name');
+  public updateModalTitle(): void {
+    this.store.dispatch(updateModalTitle({ title: 'Edit board' }));
   }
 }

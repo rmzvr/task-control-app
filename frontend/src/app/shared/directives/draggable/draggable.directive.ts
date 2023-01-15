@@ -39,7 +39,7 @@ export class DraggableDirective {
   }
 
   @HostListener('pointerenter', ['$event'])
-  onPointerEnter(event: PointerEvent): void {
+  onPointerEnter(): void {
     if (!this.draggable) {
       return;
     }

@@ -1,13 +1,13 @@
 import { List } from '../states/lists';
 
 export interface Board {
-  _id: string;
+  _id?: string;
   name: string;
   userID: string;
   description: string;
   background: string;
-  created_date: string;
-  lists: List[];
+  created_date?: string;
+  lists?: List[];
 }
 
 export interface BoardsState {

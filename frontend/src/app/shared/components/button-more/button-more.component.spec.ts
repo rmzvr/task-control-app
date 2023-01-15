@@ -8,16 +8,27 @@ describe('ButtonMoreComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonMoreComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonMoreComponent],
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(ButtonMoreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should change button theme to light', () => {
+    component.isButtonLight = true;
+    expect(component.setButtonTheme()).toBe(
+      'button-more button-more--theme--light'
+    );
+  });
+
+  it('should change button theme to dark', () => {
+    component.isButtonLight = false;
+    expect(component.setButtonTheme()).toBe(
+      'button-more button-more--theme--dark'
+    );
   });
 });

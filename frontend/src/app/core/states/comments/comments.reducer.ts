@@ -25,7 +25,7 @@ export const commentsReducer = createReducer(
       (c) => c._id === comment._id
     );
 
-    copiedComments.splice(currentCommentIndex, 1, comment);
+    copiedComments[currentCommentIndex] = comment;
 
     return {
       ...state,
@@ -34,17 +34,9 @@ export const commentsReducer = createReducer(
   }),
 
   on(deleteComment, (state: CommentsState, { comment }) => {
-    const copiedComments = [...state.comments];
-
-    const currentCommentIndex = copiedComments.findIndex(
-      (c) => c._id === comment._id
-    );
-
-    copiedComments.splice(currentCommentIndex, 1);
-
     return {
       ...state,
-      comments: copiedComments,
+      comments: state.comments.filter((c) => c._id !== comment._id),
     };
   }),
 

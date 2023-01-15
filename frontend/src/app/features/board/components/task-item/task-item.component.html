@@ -1,7 +1,8 @@
-<li class="task-item" droppable (dragStart)="setCurrentTask()" (click)="openTask()" hover>
+<li class="task-item" droppable (dragStart)="setCurrentTask()" (click)="setCurrentTask(); toggleTaskModal()" hover>
   <div class="task-item__header">
     <span class="task-item__name">{{ task.name }}</span>
-    <button class="task-item__button-edit" type="button" (click)="openTaskMenu($event)" hover>
+    <button class="task-item__button-edit" type="button"
+      (click)="$event.stopPropagation(); setCurrentTask(); toggleTaskMenu()" hover>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
         xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
         <g>

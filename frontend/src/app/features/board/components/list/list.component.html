@@ -76,7 +76,8 @@
       <textarea class="form__textarea" placeholder="Enter title for this task..." #textarea></textarea>
     </div>
     <div class="form__buttons">
-      <button class="form__button-submit" type="submit" (click)="addTask($event, textarea.value); textarea.value = ''">
+      <button class="form__button-submit" type="button"
+        (click)="addTask(textarea.value); toggleNewTaskForm(); textarea.value = ''">
         Add task
       </button>
       <button class="form__button-close" type="button" (click)="toggleNewTaskForm()">

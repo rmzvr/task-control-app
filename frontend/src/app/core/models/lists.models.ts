@@ -3,7 +3,7 @@ export interface List {
   name: string;
   boardID: string;
   background: string;
-  tasks: Task[];
+  tasks?: Task[];
   isArchive?: boolean;
 }
 

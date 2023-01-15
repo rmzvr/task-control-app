@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '@features/board/services/user/user.service';
 import { LoginService } from '@features/login/services/login.service';
-import { act, Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, from, map, of, switchMap } from 'rxjs';
 import {
   loadUser,

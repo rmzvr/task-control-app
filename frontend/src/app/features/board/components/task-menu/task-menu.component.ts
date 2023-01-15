@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./task-menu.component.scss'],
 })
 export class TaskMenuComponent implements OnInit {
-  public isTaskMenuOpen$: Observable<any>;
+  public isTaskMenuOpen$: Observable<boolean>;
 
   public currentTask$: Observable<any>;
   public currentTask: any;
@@ -45,17 +45,19 @@ export class TaskMenuComponent implements OnInit {
     });
   }
 
-  public closeMenuOnOverlay(event: Event): void {
-    const el = event.target as HTMLElement;
+  public closeMenu(target: EventTarget | null): void {
+    const el = target as HTMLDivElement;
 
-    if (!el.getAttribute('data-overlay')) return;
+    if (!el.classList.contains('task-menu-overlay')) return;
 
+    this.toggleTaskMenu();
+  }
+
+  public toggleTaskMenu(): void {
     this.store.dispatch(toggleTaskMenu());
   }
 
-  public openTask(): void {
-    this.store.dispatch(toggleTaskMenu());
-
+  public toggleTaskModal(): void {
     this.store.dispatch(toggleTaskModal());
   }
 
@@ -70,8 +72,6 @@ export class TaskMenuComponent implements OnInit {
         },
       })
     );
-
-    this.store.dispatch(toggleTaskMenu());
   }
 
   public archiveTask(): void {
@@ -83,13 +83,9 @@ export class TaskMenuComponent implements OnInit {
         },
       })
     );
-
-    this.store.dispatch(toggleTaskMenu());
   }
 
   public deleteTask(): void {
     this.store.dispatch(deleteTask({ task: this.currentTask }));
-
-    this.store.dispatch(toggleTaskMenu());
   }
 }

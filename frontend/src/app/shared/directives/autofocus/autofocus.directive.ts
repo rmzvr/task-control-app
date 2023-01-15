@@ -2,17 +2,14 @@ import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
   selector: '[autofocus]',
+  exportAs: 'autofocus',
 })
 export class AutofocusDirective {
-  constructor(private el: ElementRef) {
-    if (!el.nativeElement['focus']) {
-      throw new Error('Element does not accept focus.');
-    }
-  }
+  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
     const input: HTMLInputElement = this.el.nativeElement as HTMLInputElement;
+
     input.focus();
-    input.select();
   }
 }

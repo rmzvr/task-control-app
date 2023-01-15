@@ -6,6 +6,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { List, updateList } from '@core/states/lists';
 import {
   EditTaskMenuPosition,
@@ -40,7 +41,7 @@ import { combineLatest, map, Observable } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   @Input() list!: List;
-  @Input() boardID!: string;
+  public boardID!: string;
 
   public isNewTaskFormOpen: boolean = false;
   public isContextMenuOpen: boolean = false;
@@ -51,13 +52,13 @@ export class ListComponent implements OnInit {
   public currentTask$: Observable<Task | null>;
   public currentTask!: Task | null;
 
-  public tasks$: Observable<any>;
+  public tasks$: Observable<Task[]>;
 
   public state: string = 'default';
 
   public editTaskMenuPosition$: Observable<EditTaskMenuPosition>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private route: ActivatedRoute) {
     this.toolbarValues$ = this.store.select(selectToolbarValues);
 
     this.currentTask$ = this.store.select(selectCurrentTask);
@@ -65,6 +66,8 @@ export class ListComponent implements OnInit {
     this.tasks$ = this.store.select(selectBoardTasks);
 
     this.editTaskMenuPosition$ = this.store.select(selectEditTaskMenuPosition);
+
+    this.boardID = this.route.snapshot.paramMap.get('id') as string;
   }
 
   ngOnInit(): void {
@@ -123,16 +126,12 @@ export class ListComponent implements OnInit {
     );
   }
 
-  public addTask(event: Event, value: string) {
-    event.preventDefault();
-
+  public addTask(value: string) {
     this.store.dispatch(
       addTask({
         task: { name: value, listID: this.list._id, boardID: this.boardID },
       })
     );
-
-    this.toggleNewTaskForm();
   }
 
   public moveTask(): void {

@@ -10,6 +10,7 @@ import { DroppableService } from '../droppable/droppable.service';
 
 @Directive({
   selector: '[dropzone]',
+  exportAs: 'dropzone',
 })
 export class DropzoneDirective implements OnInit {
   @HostBinding('class.dropzone-activated') public activated: boolean = false;

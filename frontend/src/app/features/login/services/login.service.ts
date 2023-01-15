@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { User } from '@core/models/user.models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,22 +10,18 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  public registerUser(user: any) {
+  public registerUser(user: User) {
     return this.http.post(
       `https://serene-plains-22341.herokuapp.com/api/auth/register`,
       user
     );
   }
 
-  public loginUser(user: any) {
-    return this.http
-      .post(`https://serene-plains-22341.herokuapp.com/api/auth/login`, user)
-      .pipe(
-        tap((res: any) => {
-          localStorage.setItem('token', res.jwt_token);
-          localStorage.setItem('isAuthorized', 'true');
-        })
-      );
+  public loginUser(user: User) {
+    return this.http.post(
+      `https://serene-plains-22341.herokuapp.com/api/auth/login`,
+      user
+    );
   }
 
   public logout() {

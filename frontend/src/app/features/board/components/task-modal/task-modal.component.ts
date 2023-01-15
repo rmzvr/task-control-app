@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { loadComments, selectTaskComments } from '@core/states/comments';
 import { List, selectList } from '@core/states/lists';
 import { toggleTaskModal } from '@core/states/modals';
@@ -26,8 +26,8 @@ export class TaskModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.task$.subscribe((task) => {
-      this.store.dispatch(loadComments({ boardID: task.boardID }));
       this.list$ = this.store.select(selectList({ id: task.listID }));
+      this.loadComments(task.boardID);
 
       this.comments$ = this.store.select(selectTaskComments).pipe(
         concatMap((e) =>
@@ -38,6 +38,10 @@ export class TaskModalComponent implements OnInit {
         )
       );
     });
+  }
+
+  public loadComments(boardID: string): void {
+    this.store.dispatch(loadComments({ boardID }));
   }
 
   public toggleModal(): void {

@@ -4,9 +4,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, from, map, of, switchMap } from 'rxjs';
 
 import {
-  addList,
-  addListSuccess,
-  addListFailed,
   updateList,
   updateListSuccess,
   updateListFailed,
@@ -21,25 +18,13 @@ export class ListsEffects {
 
   loadLists$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadLists, addListSuccess, updateListSuccess),
+      ofType(loadLists, updateListSuccess),
       switchMap((action) =>
         from(
           this.listService.getLists(action.boardID).pipe(
             map((lists: any) => loadListsSuccess({ lists: lists })),
             catchError((error) => of(loadListsFailed({ error })))
           )
-        )
-      )
-    )
-  );
-
-  addList$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(addList),
-      switchMap((action) =>
-        this.listService.addList(action.list).pipe(
-          map(() => addListSuccess({ boardID: action.list.boardID })),
-          catchError((error) => of(addListFailed({ error })))
         )
       )
     )

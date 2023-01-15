@@ -9,9 +9,9 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./board-tile.component.scss'],
 })
 export class BoardTileComponent {
-  public isMenuOpen: boolean = false;
-
   @Input() board!: Board;
+
+  public isMenuOpen: boolean = false;
 
   constructor(private store: Store) {}
 
@@ -21,10 +21,12 @@ export class BoardTileComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  public toggleUpdateBoardModal(board: Board): void {
-    this.store.dispatch(setEditableBoard({ board }));
-
+  public toggleUpdateBoardModal(): void {
     this.store.dispatch(toggleUpdateBoardModal());
+  }
+
+  public setEditableBoard(): void {
+    this.store.dispatch(setEditableBoard({ board: this.board }));
   }
 
   public deleteBoard(): void {

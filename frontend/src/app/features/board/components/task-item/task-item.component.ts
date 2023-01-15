@@ -3,16 +3,7 @@ import { selectTaskComments } from '@core/states/comments';
 import { toggleTaskMenu, toggleTaskModal } from '@core/states/modals';
 import { setCurrentTask, Task } from '@core/states/tasks';
 import { Store } from '@ngrx/store';
-import {
-  concatMap,
-  distinct,
-  filter,
-  from,
-  mergeMap,
-  Observable,
-  tap,
-  toArray,
-} from 'rxjs';
+import { concatMap, filter, from, Observable, toArray } from 'rxjs';
 
 @Component({
   selector: 'app-task-item',
@@ -36,20 +27,15 @@ export class TaskItemComponent {
     );
   }
 
-  public openTask(): void {
+  public setCurrentTask(): void {
     this.store.dispatch(setCurrentTask({ task: this.task }));
-
-    this.store.dispatch(toggleTaskModal());
   }
 
-  public openTaskMenu(event: Event): void {
-    event.stopPropagation();
-
-    this.store.dispatch(setCurrentTask({ task: this.task }));
+  public toggleTaskMenu(): void {
     this.store.dispatch(toggleTaskMenu());
   }
 
-  public setCurrentTask(): void {
-    this.store.dispatch(setCurrentTask({ task: this.task }));
+  public toggleTaskModal(): void {
+    this.store.dispatch(toggleTaskModal());
   }
 }

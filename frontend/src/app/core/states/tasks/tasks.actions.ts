@@ -8,7 +8,7 @@ export const addTask = createAction(
 
 export const addTaskSuccess = createAction(
   '[Board Page] Add Task Success',
-  props<{ boardID: string | null }>()
+  props<{ boardID: string }>()
 );
 
 export const addTaskFailed = createAction(
@@ -53,7 +53,7 @@ export const setCurrentTask = createAction(
 
 export const loadTasks = createAction(
   '[Board Page] Load Tasks',
-  props<{ boardID: string | null }>()
+  props<{ boardID: string }>()
 );
 
 export const loadTasksSuccess = createAction(

@@ -14,7 +14,6 @@ import { DroppableDirective } from './directives/droppable/droppable.directive';
 import { DroppableService } from './directives/droppable/droppable.service';
 import { AddBoardModalComponent } from './components/add-board-modal/add-board-modal.component';
 import { EditBoardModalComponent } from './components/edit-board-modal/edit-board-modal.component';
-import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 import { AutofocusDirective } from './directives/autofocus/autofocus.directive';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
@@ -31,7 +30,6 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
     ButtonMoreComponent,
     AddBoardModalComponent,
     EditBoardModalComponent,
-    ContextMenuComponent,
     AutofocusDirective,
     SkeletonComponent,
   ],
@@ -49,7 +47,6 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
     OverlayModule,
     AddBoardModalComponent,
     EditBoardModalComponent,
-    ContextMenuComponent,
     AutofocusDirective,
     SkeletonComponent,
   ],

@@ -14,6 +14,7 @@ import { CoreModule } from '@core/core.module';
 import { BoardRoutingModule } from './board-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '@features/login/interceptors/auth.interceptor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthInterceptor } from '@features/login/interceptors/auth.interceptor';
     HttpClientModule,
     CoreModule,
     BoardRoutingModule,
+    FormsModule
   ],
   exports: [BoardComponent],
   providers: [

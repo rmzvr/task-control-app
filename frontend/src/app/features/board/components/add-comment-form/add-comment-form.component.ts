@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Task } from '@core/models/tasks.models';
 import { addComment } from '@core/states/comments';
 import { Store } from '@ngrx/store';
 
@@ -8,7 +9,10 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./add-comment-form.component.scss'],
 })
 export class AddCommentFormComponent {
-  @Input() task: any;
+  @Input() task!: Task;
+  
+  public commentValue: string = '';
+
   public isEditCommentFormOpen: boolean = false;
   public isAddCommentFormOpen: boolean = false;
 
@@ -22,17 +26,19 @@ export class AddCommentFormComponent {
     this.isAddCommentFormOpen = !this.isAddCommentFormOpen;
   }
 
-  public addComment(event: Event, value: string): void {
-    event.preventDefault();
-
+  public addComment(): void {
     this.store.dispatch(
       addComment({
         comment: {
-          name: value,
+          name: this.commentValue,
           taskID: this.task._id,
           boardID: this.task.boardID,
         },
       })
     );
+  }
+
+  public cleanCommentValue(): void {
+    this.commentValue = '';
   }
 }
